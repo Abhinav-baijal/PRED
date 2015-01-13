@@ -1,13 +1,13 @@
 def convert_data(data):
-	result={}
+    result={}
 
-	for clustering,values in data.items():
-		result[clustering]={}
-		for k,v in values.items():
-			for image in v:
-				result [clustering][image]=k
+    for clustering,values in data.items():
+        result[clustering]={}
+        for k,v in values.items():
+            for image in v:
+                result [clustering][image]=k
 
-	return result
+    return result
 
 def compute_distance_matrix(data):
     result = {}

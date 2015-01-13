@@ -12,7 +12,7 @@ def convert_data(data):
 def compute_distance_matrix(data):
     result = {}
 
-    nb_clusters = max([len(set(clustering.values())) for clustering in data.values()])
+    nb_clusters = len(data)
 
     for image in next(iter(data.values())):
         result[image] = {}

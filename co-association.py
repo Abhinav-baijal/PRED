@@ -26,3 +26,6 @@ def compute_distance_matrix(data):
                     result[a][b] -= 1
 
     return result
+
+def distance_matrix(data):
+    return compute_distance_matrix(convert_data(data))

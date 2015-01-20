@@ -13,4 +13,5 @@ agglomerative.fit(distancematrix)
 
 result = dict(zip(images.imageids, agglomerative.labels_))
 
-image_utils.images_on_grid(image_utils.image_ids_to_paths([image for image,cluster in result.items() if cluster == 1])).show()
+def display_cluster(cluster_id):
+    image_utils.images_on_grid(image_utils.image_ids_to_paths([image for image,cluster in result.items() if cluster == cluster_id])).show()

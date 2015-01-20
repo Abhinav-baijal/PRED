@@ -1,8 +1,8 @@
 import data as testdata
 import images
 import coassociation
-from PIL import Image
 from sklearn import cluster
+import image_utils
 
 agglomerative = cluster.AgglomerativeClustering(n_clusters = 100,
                                                 affinity = 'precomputed',
@@ -13,6 +13,4 @@ agglomerative.fit(distancematrix)
 
 result = dict(zip(images.imageids, agglomerative.labels_))
 
-filenames = ['images/' + images.images[image][1] for image,cluster in result.items() if cluster == 1]
-for f in filenames:
-    Image.open(f).show()
+image_utils.images_on_grid(image_utils.image_ids_to_paths([image for image,cluster in result.items() if cluster == 1])).show()

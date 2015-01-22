@@ -1,5 +1,5 @@
-import data as testdata
 import images
+import data
 import coassociation
 import data_format
 from sklearn import cluster
@@ -12,7 +12,7 @@ agglomerative = cluster.AgglomerativeClustering(n_clusters = 100,
 distancematrix = data_format.dict_to_matrix(coassociation.distance_matrix(data.data))
 agglomerative.fit(distancematrix)
 
-result = dict(zip(images.imageids, agglomerative.labels_))
+result = data_format.labels_as_dictionary(agglomerative.labels_)
 
 def display_cluster(cluster_id):
     image_utils.images_on_grid(image_utils.image_ids_to_paths([image for image,cluster in result.items() if cluster == cluster_id])).show()

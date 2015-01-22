@@ -33,8 +33,8 @@ def distance_matrix(data):
 
 def constrain_together(matrix,image1,image2):
     matrix[image1][image2] =0
-    matrix[image2][image1] =0 
-    
-def constrain_appart(matrix, image1, image2)
+    matrix[image2][image1] =0
+
+def constrain_appart(matrix, image1, image2):
     matrix[image1][image2] = float("inf")
     matrix[image2][image1] = float("inf")

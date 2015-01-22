@@ -1,6 +1,7 @@
 import data as testdata
 import images
 import coassociation
+import data_format
 from sklearn import cluster
 import image_utils
 
@@ -8,7 +9,7 @@ agglomerative = cluster.AgglomerativeClustering(n_clusters = 100,
                                                 affinity = 'precomputed',
                                                 linkage = 'average')
 
-distancematrix = coassociation.dict_to_matrix(coassociation.distance_matrix(testdata.data))
+distancematrix = data_format.dict_to_matrix(coassociation.distance_matrix(data.data))
 agglomerative.fit(distancematrix)
 
 result = dict(zip(images.imageids, agglomerative.labels_))

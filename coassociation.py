@@ -38,13 +38,3 @@ def constrain_together(matrix,image1,image2):
 def constrain_appart(matrix, image1, image2)
     matrix[image1][image2] = float("inf")
     matrix[image2][image1] = float("inf")
-    
-
-def dict_to_matrix(d):
-    result = []
-    for k in sorted(d):
-        subresult = []
-        for k2 in sorted(d[k]):
-            subresult.append(d[k][k2])
-        result.append(subresult)
-    return result

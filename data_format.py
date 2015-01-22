@@ -1,3 +1,5 @@
+import images
+
 def dict_to_list(d):
     tmp_dict = {}
     for cluster,images in d.items():
@@ -29,3 +31,6 @@ def dict_to_matrix(d):
             subresult.append(d[k][k2])
         result.append(subresult)
     return result
+
+def labels_as_dictionary(labels):
+    return dict(zip(images.imageids, labels))

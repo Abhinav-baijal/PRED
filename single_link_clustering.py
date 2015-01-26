@@ -18,7 +18,7 @@ def display_cluster(cluster_id):
     image_utils.images_on_grid(image_utils.image_ids_to_paths([image for image,cluster in result.items() if cluster == cluster_id])).show()
 
 def result_quality():
-    quality.consensus_quality(data_format.list_to_dict(agglomerative.labels_), data.data)
+    return quality.consensus_quality(data_format.list_to_dict(agglomerative.labels_), data.data)
 
 def original_clusterings_quality():
-    [quality.consensus_quality(x, data.data) for x in data.data.values()]
+    return [quality.consensus_quality(x, data.data) for x in data.data.values()]

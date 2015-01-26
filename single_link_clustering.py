@@ -22,3 +22,7 @@ def result_quality():
 
 def original_clusterings_quality():
     return [quality.consensus_quality(x, data.data) for x in data.data.values()]
+
+def graph_quality():
+    import plot
+    plot.consensus_quality_bar_chart(result_quality(), original_clusterings_quality())

@@ -5,24 +5,36 @@ from sklearn import cluster
 import image_utils
 import quality
 
-agglomerative = cluster.AgglomerativeClustering(n_clusters = 100,
-                                                affinity = 'precomputed',
-                                                linkage = 'average')
-
 distancematrix = data_format.dict_to_matrix(coassociation.distance_matrix(data.data))
-agglomerative.fit(distancematrix)
 
-result = data_format.labels_as_dictionary(agglomerative.labels_)
+def agglomerative_clustering(clusters, linkage_type):
+    agglomerative = cluster.AgglomerativeClustering(n_clusters = clusters,
+                                                    affinity = 'precomputed',
+                                                    linkage = linkage_type)
 
-def display_cluster(cluster_id):
-    image_utils.images_on_grid(image_utils.image_ids_to_paths([image for image,cluster in result.items() if cluster == cluster_id])).show()
+    agglomerative.fit(distancematrix)
 
-def result_quality():
-    return quality.consensus_quality(data_format.list_to_dict(agglomerative.labels_), data.data)
+    return data_format.list_to_dict(agglomerative.labels_.copy())
+
+results = {
+    'average_10' : agglomerative_clustering(10,'average'),
+    'average_50' : agglomerative_clustering(50,'average'),
+    'average_100' : agglomerative_clustering(100,'average'),
+
+    'complete_10' : agglomerative_clustering(10,'complete'),
+    'complete_50' : agglomerative_clustering(50,'complete'),
+    'complete_100' : agglomerative_clustering(100,'complete')
+}
+
+def display_cluster(result, cluster_id):
+    image_utils.images_on_grid(image_utils.image_ids_to_paths(result[cluster_id])).show()
+
+def result_quality(result):
+    return quality.consensus_quality(result, data.data)
 
 def original_clusterings_quality():
     return [quality.consensus_quality(x, data.data) for x in data.data.values()]
 
-def graph_quality():
+def graph_quality(result):
     import plot
-    plot.consensus_quality_bar_chart(result_quality(), original_clusterings_quality())
+    plot.consensus_quality_bar_chart(result_quality(result), original_clusterings_quality(result))

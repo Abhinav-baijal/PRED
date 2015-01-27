@@ -1,3 +1,4 @@
+import sys
 def convert_data(data):
     result={}
 
@@ -32,14 +33,14 @@ def distance_matrix(data):
 
 
 def constrain_together(matrix,image1,image2):
-    matrix[image1][image2] =0
-    matrix[image2][image1] =0 
+    matrix[image1][image2] =-sys.maxsize
+    matrix[image2][image1] =-sys.maxsize
+   
     
-def constrain_appart(matrix, image1, image2)
-    matrix[image1][image2] = float("inf")
-    matrix[image2][image1] = float("inf")
-    
-
+def constrain_apart(matrix, image1, image2):
+    matrix[image1][image2] = sys.maxsize
+    matrix[image2][image1] = sys.maxsize
+   
 def dict_to_matrix(d):
     result = []
     for k in sorted(d):

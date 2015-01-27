@@ -1,4 +1,4 @@
-def write_html(clustering):
+def write_html(clustering,filename='display'):
 
     def display_images(ids):
         import image_utils
@@ -12,7 +12,9 @@ def write_html(clustering):
 
             display_images(v)
 
-    file =open('display.html', 'w')
+
+
+    file =open(filename, 'w')
 
     file.write(
     """<!DOCTYPE html>
@@ -33,3 +35,7 @@ def write_html(clustering):
     </html>""")
 
     file.close()
+
+def total_clustering (clusterings, prefix='display'):
+    for k,v in clusterings.items():
+        write_html(v,prefix+str(k)+'_clusters.html')

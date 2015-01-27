@@ -8,24 +8,22 @@ import quality
 from distance_matrix import distance_matrix
 #distancematrix = data_format.dict_to_matrix(coassociation.distance_matrix(data.data))
 
-def agglomerative_clustering(clusters, linkage_type):
+def agglomerative_clustering(clusters, linkage_type='average'):
     agglomerative = cluster.AgglomerativeClustering(n_clusters = clusters,
                                                     affinity = 'precomputed',
-                                                    linkage = linkage_type)
+                                                    linkage = linkage_type,
+                                                    memory = '/tmp/sklearn-cache/')
 
     agglomerative.fit(distance_matrix)
 
     return data_format.list_to_dict(agglomerative.labels_.copy())
 
-results = {
-    'average_10' : agglomerative_clustering(10,'average'),
-    'average_50' : agglomerative_clustering(50,'average'),
-    'average_100' : agglomerative_clustering(100,'average'),
+results = {i:agglomerative_clustering(i) for i in range(1,len(distance_matrix)+1,10)}
 
-    'complete_10' : agglomerative_clustering(10,'complete'),
-    'complete_50' : agglomerative_clustering(50,'complete'),
-    'complete_100' : agglomerative_clustering(100,'complete')
-}
+def cluster_number_quality_curve():
+    qualities = {k:result_quality(v) for k,v in results.items()}
+    import plot
+    plot.bar_chart(list(qualities.keys()), list(qualities.values()))
 
 def display_cluster(result, cluster_id):
     image_utils.images_on_grid(image_utils.image_ids_to_paths(result[cluster_id])).show()

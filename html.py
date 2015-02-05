@@ -24,7 +24,6 @@ def write_html(clustering,filename='display'):
     </head>
 
     <body>
-    The content of the document......
     """
     )
 

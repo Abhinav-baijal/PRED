@@ -2,7 +2,7 @@ from PIL import Image
 import data
 import images
 import math
-
+#this script is written to display the thumbnail grid to display a cluster in a clusterings. iterates over the image to dispaly a cluster. Each cluster is displayed in a single window. Uses image viewer image magick to open the thumbnail view.  
 def image_ids_to_paths(ids):
     return ['images/' + images.images[id][1] for id in ids]
 

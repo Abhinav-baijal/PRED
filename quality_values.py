@@ -1,3 +1,4 @@
+#to save qualities values .
 quality_values = [
     0.6141163318242611,
     0.5869284744797727,

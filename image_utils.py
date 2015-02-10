@@ -9,7 +9,7 @@ def image_ids_to_paths(ids):
 def images_on_grid(paths):
     thumbnail_size = 200
     count_x = math.ceil(math.sqrt(len(paths)))
-    count_y = math.floor(math.sqrt(len(paths)))
+    count_y = math.ceil(len(paths) / count_x)
 
     result = Image.new('RGB', (count_x*thumbnail_size,count_y*thumbnail_size))
 

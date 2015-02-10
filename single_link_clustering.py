@@ -5,8 +5,10 @@ from sklearn import cluster
 import image_utils
 import quality
 
-from distance_matrix import distance_matrix
-#distancematrix = data_format.dict_to_matrix(coassociation.distance_matrix(data.data))
+print("Computing distance matrix")
+
+#from distance_matrix import distance_matrix
+distance_matrix = data_format.dict_to_matrix(coassociation.distance_matrix(data.data))
 
 def agglomerative_clustering(clusters, linkage_type='average'):
     agglomerative = cluster.AgglomerativeClustering(n_clusters = clusters,
@@ -17,6 +19,8 @@ def agglomerative_clustering(clusters, linkage_type='average'):
     agglomerative.fit(distance_matrix)
 
     return data_format.list_to_dict(agglomerative.labels_.copy())
+
+print("Building consensus clusterings")
 
 results = {i:agglomerative_clustering(i) for i in range(1,len(distance_matrix)+1,10)}
 

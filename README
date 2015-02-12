@@ -1,0 +1,51 @@
+*List of files
+- clustering.py: main file, contains the global algorithm
+- coassociation.py: functions to compute the distance matrix
+- data.py: contains the input clusterings
+- data_format.py: functions to change the data format
+- distance_matrix.py: cached distance matrix
+- html.py: generates html outputs
+- images.py: relation between image ids and paths
+- image_utils.py: thumbnail grid generation
+- plot.py: measure graphs
+- quality_of_results: cached values for result quality
+- quality.py: functions to compute the quality of a consensus
+- quality_values.py: quality values measured for input partitions
+- testdata.py: small dataset for tests
+- images directory: contains all the images (confidential)
+
+*Run the program
+Requires python 3
+$ python -i clustering.py
+OR, depending on the distribution
+$ python3 -i clustering.py
+
+*Variables
+>>> distance_matrix
+The computed distance matrix
+>>> results
+Obtained results (available for 1, 11, 21, 31… 1001 clusters)
+
+*Commands
+>>> agglomerative_clustering(661, 'average')
+Returns a consensus clustering based on distance_matrix with 661 cluster, using the 'average' linkage criterion.
+
+>>> display_cluster(result[661], 1)
+Display the cluster #1 for result clustering #661 as a thumbnail grid.
+
+>>> import html
+To use the HTML functions
+>>> html.write_html(result[661], 'result661.html')
+Generate an HTML page for the consensus clustering #661.
+>>> html.total_clustering(result), 'result')
+Generate HTML pages for all results
+>>> html.total_clustering(data.data), 'input')
+Generate HTML pages for all input clusterings
+
+>>> result_quality(result[661])
+Compute the quality for result #661
+>>> cluster_number_quality_curve()
+Generates the plot for the quality of a result depending on the number of clusters
+
+*Cached values
+Some lines can be commented/uncommented to use precomputed values. Search for comments "# Comment/Uncomment to use cached values" in clustering.py
